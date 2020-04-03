@@ -14,7 +14,7 @@ class link_layer:
 
 	def sending_request(self,pck):
 		self.pending_pck.append(pck)	#add the package to pending list
-		self.host.master.add_queue(self)	#host gets in the master queue
+		self.host.master.add_queue(self.host)	#host gets in the master queue
 
-	# def send_pck_physical(self): #send a package to physical layer
-	# 	self.host.physical_layer.receive_pck(pck) 
+	def send_pck_physical(self): #send a package to physical layer
+	 	self.host.physical_layer.receive_pck(pck) 
