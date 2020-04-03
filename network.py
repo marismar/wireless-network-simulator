@@ -47,9 +47,15 @@ class network_layer:
 				pck.add_next([]) #send a RREQ package to all neighbors
 				self.create_RREQ_pck(pck)
 			else:	#if the receptor is in the path
-				if(host_position < len(pck.get_path())):
+				if(host_position < (len(pck.get_path())-1)):
 					path = pck.get_path()
 					neighbor = path[host_position+1]
+					if(self.host.is_reacheable(neighbor)):
+						self.table.save_route(path)
+						#VERIFICAR O PROXIMO E ENVIAR
+						pck.add_next(neighbor)
+						self.host.link.sending_request(pck)
+
 
 
 
