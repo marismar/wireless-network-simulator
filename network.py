@@ -48,6 +48,8 @@ class network_layer:
 				self.create_RREQ_pck(pck)
 			else:	#if the receptor is in the path
 				if(host_position < len(pck.get_path())):
+					path = pck.get_path()
+					neighbor = path[host_position+1]
 
 
 
