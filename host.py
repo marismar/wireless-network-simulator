@@ -1,7 +1,8 @@
-import physical
-import link
-import network
-import package
+from physical import physical_layer
+from link import link_layer
+from network import network_layer
+from package import package
+from table import routing_table
 import weakref
 import math
 
@@ -13,11 +14,11 @@ class host:
 		self.physical = physical_layer(self)
 		self.link = link_layer(self)
 		self.network = network_layer(self)
+		self.master = master
 		self.reach = reach
 		self.mac = mac
 		self.positionx = x
 		self.positiony = y
-		self.master = master
 		self._instances.add(weakref.ref(self))	
 
 	@classmethod	#to list all instances of host class
@@ -43,6 +44,7 @@ class host:
 		return distance <= self.reach #returns true if is reacheable
 
 	def get_neighbors(self):	#get all neighbors of a host
+		neighbors = []
 		for obj in host.get_instances():
 			if(self.is_reacheable(obj)):	#check if a node is reacheable
 				neighbors.append(obj)	#add to the list of neighbors

@@ -1,4 +1,9 @@
-import host
+from host import host
+from package import package
+from link import link_layer
+from network import network_layer
+from table import routing_table
+
 
 class physical_layer:
 	def __init__(self,host):

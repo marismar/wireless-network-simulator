@@ -1,5 +1,8 @@
-import host
-import package
+from host import host
+from package import package
+from link import link_layer
+from physical import physical_layer
+from table import routing_table
 
 class network_layer:
 	def __init__(self,host):
@@ -20,10 +23,12 @@ class network_layer:
 			pck.get_contents() #receive contents of the package
 			#IMPORTANT: write it in a log file
 		elif(pck.get_type() == 'DATA' and pck.get_destination() != self.host.get_mac()): #if the receptor is next at the route
-			if(self.table.check_route(pck.get_destination())) 
-
-			else:
-
+			if(self.table.check_route(pck.get_destination())) #check if there is a route
+				pck.add_next(self.table.get_next_to(pck.get_destination())):	#add next to the route
+				self.host.link.sending_request(pck)				
+			else:	#if there is not a route in routing table
+				pck.add_next([]) #send a RREQ package to all neighbors
+				self.create_RREQ_pck(pck)
 		elif(pck.get_type() == 'RREQ' and pck.get_destination() != self.host.get_mac()): #if the host is not the destination
 
 
@@ -31,6 +36,20 @@ class network_layer:
 
 
 		elif(pck.get_type() == 'RREP' and pck.get_destination() != self.host.get_mac()):
+			count = 0
+			host_position = -1
+			for obj in pck.get_path():	#check the host position in the path
+				if(obj == self.host.get_mac()):	
+					host_position = count #when it is found, save it
+					break
+				count += 1
+			if(host_position < 0):	#if the receptor host is not in the path
+				pck.add_next([]) #send a RREQ package to all neighbors
+				self.create_RREQ_pck(pck)
+			else:	#if the receptor is in the path
+				if(host_position < len(pck.get_path())):
+
+
 
 
 		elif(pck.get_type() == 'RREP' and pck.get_destination() == self.host.get_mac()):
