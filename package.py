@@ -36,4 +36,3 @@ class package:
 
 	def get_destination(self):	#returns the destination
 		return self.destination
-
