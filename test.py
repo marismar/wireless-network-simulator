@@ -1,9 +1,13 @@
-print("Antes de entrar no laco")
-item = 0
-while (True):
-    print(item)
-    if(item==6):
-        print("A condicao estabelecida retornou true")
-        break
-    item += 1
-print("Depois de ter entrado no laco")
+a = []
+a.append(0)
+
+a.append(1)
+
+a.append(2)
+
+a.append(3)
+
+a.append(4)
+
+for x in range(len(a)):
+	print (a[x])
