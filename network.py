@@ -41,7 +41,7 @@ class network_layer:
 		elif(pck.get_type() == 'RREQ' and pck.get_destination() == self.host.get_mac()):
 
 
-		elif(pck.get_type() == 'RREP' and pck.get_destination() != self.host.get_mac()):
+		elif(pck.get_type() == 'RREP' and pck.get_destination() != self.host.get_mac()): #if the package is RREP e the receptor is not the destination
 			count = 0
 			host_position = -1
 			for obj in pck.get_path():	#check the host position in the path
@@ -55,28 +55,35 @@ class network_layer:
 			else:	#if the receptor is in the path
 				if(host_position < (len(pck.get_path())-1)):
 					path = pck.get_path()
-					neighbor = path[host_position+1]
-					if(self.host.is_reacheable(neighbor)):
-						self.table.save_route(path)
-						self.check_send()
-						pck.add_next(neighbor)
-						self.host.link.sending_request(pck)
+					neighbor = path[host_position+1]	#get next host in the path
+					if(self.host.is_reacheable(neighbor)):	#check and if its reacheable 
+						self.table.save_route(path)	#save the route
+						self.check_send() #check the route to send
+						pck.add_next(neighbor)	#add the neighbor as next
+					self.host.link.sending_request(pck)	#send the package to link layer
+				else:	#if the next host is not save in the path
+					pck.add_next([]) #send a RREQ package to all neighbors
+					self.create_RREQ_pck(pck)
 
-		elif(pck.get_type() == 'RREP' and pck.get_destination() == self.host.get_mac()):
-			
+		elif(pck.get_type() == 'RREP' and pck.get_destination() == self.host.get_mac()): #if the package is RREP e the receptor is the destination
+			self.table.save_route(pck.get_path()) #save the route
+			self.check_send()	#check the route and send the package			
 
 
 	def check_send(self):
-		for i in range(len(self.pending_pck)):
+		for i in range(len(self.pending_pck)):	#check all pending packages that wait for a route
 			pck = self.pending_pck[0]
-			if(self.table.check_route(pck.get_destination()))
-				pck.add_next(self.table.get_next_to(pck.get_destination()))
-				self.host.link.sending_request(pck)
-				self.pending_pck.pop(0)	#remove the package 
-			else:
-				self.pending_pck.pop(0)	#remove the package
+			if(self.table.check_route(pck.get_destination())) #if there is a route to destination host
+				pck.add_next(self.table.get_next_to(pck.get_destination()))	#get the next in routing table and add to package
+				self.host.link.sending_request(pck) #send the package to link layer
+				self.pending_pck.pop(0)	#remove the package from the list
+			else:	#if there is no route to destination in routing table 
+				self.pending_pck.pop(0)	#remove the package from the list
 				self.pending_pck.append(pck)	#add the first package to the end of a list
 				
 
 	def add_received_pck(self,pck):
+		pass
+
+	def function():
 		pass
