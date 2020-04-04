@@ -4,3 +4,7 @@ from network import network_layer
 from table import routing_table
 from host import host
 from package import package
+from master import master
+
+m = master()
+m.send_permission()
