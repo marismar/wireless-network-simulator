@@ -4,11 +4,10 @@ from package import package
 
 class master:
 	def  __init__(self, host):
-		self.send_queue = [] # save all the hostesses
+		self.send_queue = [] #save all the hostesses
 		self.host = host
 
-# Function to allow sending packge 
-	def send_permission(self):
+	def send_permission(self):	#function to allow sending packge 
 		if len(send_queue) > 0:
 			sender_allowed = self.send_queue.pop(0) # pop the host that made the first request 
 			print(f'{sender_allowed.get_mac()} is sending package')
@@ -19,4 +18,3 @@ class master:
 		# add into a list every host that wants to send any type of package
 		print(f'{host.get_mac()} wants to send a package\n')
 		self.send_queue.append(host)
-	

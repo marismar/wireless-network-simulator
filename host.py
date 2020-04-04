@@ -33,7 +33,7 @@ class host:
 		cls._instances -= dead
 
 	def send_message(self,message,destination):	#send the package to network layer
-		if(len(message) > 0 and len(destination) == 0):	#check if message is valid
+		if(len(message) > 0):	#check if message is valid
 			# pck = package(id,'DATA',path,message,self.mac,destination)	#new package with the message
 			self.network_layer.send_pck()	
 
