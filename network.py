@@ -36,9 +36,27 @@ class network_layer:
 				self.create_RREQ_pck(pck)
 
 		elif(pck.get_type() == 'RREQ' and pck.get_destination() != self.host.get_mac()): #if the package is RREQ e the receptor is not the destination
+			pck.add_path(self.host.get_mac())
+			neighbor_position = len(pck.get_path()) - 2
+			if(neighbor_position < (len(pck.get_path()) - 1)):
+				path = pck.get_path()
+				neighbor = path[neighbor_position]
+				if(self.host.is_reacheable(neighbor)):	#check and if its reacheable 
+						self.table.save_route(path)	#save the route
+						self.check_send() #check the route to send
+				self.host.link.sending_request(pck)	#send the package to link layer
 
 
 		elif(pck.get_type() == 'RREQ' and pck.get_destination() == self.host.get_mac()): #if the package is RREQ e the receptor is the destination
+			pck.add_path(self.host.get_mac())
+			pck_RREP = create_RREP_pck(pck)
+			neighbor_position = 1
+			if(neighbor_position < (len(pck.get_path()) - 1)):
+				path = pck_RREP.get_path()
+				neighbor = path[neighbor_position]
+			else:
+				neighbor = []
+			#CONTINUAR DAQUI!!!!!!!
 
 
 		elif(pck.get_type() == 'RREP' and pck.get_destination() != self.host.get_mac()): #if the package is RREP e the receptor is not the destination
@@ -53,14 +71,14 @@ class network_layer:
 				pck.add_next([]) #send a RREQ package to all neighbors
 				self.create_RREQ_pck(pck)
 			else:	#if the receptor is in the path
-				if(host_position < (len(pck.get_path())-1)):
+				if(host_position < (len(pck.get_path()) - 1)):
 					path = pck.get_path()
 					neighbor = path[host_position+1]	#get next host in the path
 					if(self.host.is_reacheable(neighbor)):	#check and if its reacheable 
 						self.table.save_route(path)	#save the route
 						self.check_send() #check the route to send
 						pck.add_next(neighbor)	#add the neighbor as next
-					self.host.link.sending_request(pck)	#send the package to link layer
+						self.host.link.sending_request(pck)	#send the package to link layer
 				else:	#if the next host is not save in the path
 					pck.add_next([]) #send a RREQ package to all neighbors
 					self.create_RREQ_pck(pck)
