@@ -4,3 +4,5 @@ from network import network_layer
 from table import routing_table
 from host import host
 from package import package
+
+print(10)
