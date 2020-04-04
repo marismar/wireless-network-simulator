@@ -41,7 +41,11 @@ class host:
 		first_part = ((self.positionx - neighbor.positionx)**2)
 		second_part = ((self.positiony - neighbor.positiony)**2)
 		distance = math.sqrt(first_part + second_part)
-		return distance <= self.reach #returns true if is reacheable
+		
+		if distance == 0: 	# to not add itself on the neighbors list
+			return distance
+		else:
+			return distance <= self.reach #returns true if is reacheable
 
 	def get_neighbors(self):	#get all neighbors of a host
 		neighbors = []
