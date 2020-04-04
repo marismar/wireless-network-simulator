@@ -5,13 +5,32 @@ from physical import physical_layer
 from table import routing_table
 
 class network_layer:
+
+    _id_pck = 0
+
 	def __init__(self,host):
 		self.host = host
 		self.table = routing_table()
 		self.pending_pck = []
 
-	def send_pck():	#to link layer
-		pass
+	def send_pck(self,message,destination):	#to link layer
+		if(len(message) > 0):	#check if message is valid
+			pck = package(network_layer._id_pck,'DATA',message,self.host.get_mac(),destination)	#new package with the message
+			network_layer._id_pck += 1
+			#CONTINUAR AQUIII!!
+
+
+	def create_RREQ_pck(self,pck):
+		
+
+	def create_RREP_pck(self,pck_RREQ):
+		pck_RREP = package(network_layer._id_pck,'RREP',[],self.host.get_mac(),pck_RREQ.get_originator())
+		network_layer._id_pck += 1
+		path_RREQ = pck_RREQ.get_path()
+		path_RREQ.reverse()
+		for obj in path_RREQ:
+			pck_RREP.add_path(obj)
+		return pck_RREP
 
 	def receive_pck(self,pck):	#receive a package from link layer
 		if(pck.get_originator() == self.host.get_mac()): #if the receptor is the package originator

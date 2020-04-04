@@ -5,11 +5,11 @@ from physical import physical_layer
 from table import routing_table
 
 class package:
-	def __init__(self,id,type,path,contents,originator,destination):
+	def __init__(self,id,type,contents,originator,destination):
 		self.id = id
 		self.type = type
-		self.path = path	
-		self.next = path[0]
+		self.path = []	
+		self.next = 0
 		self.contents = contents
 		self.originator = originator
 		self.destination = destination

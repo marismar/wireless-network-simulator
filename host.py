@@ -33,9 +33,7 @@ class host:
 		cls._instances -= dead
 
 	def send_message(self,message,destination):	#send the package to network layer
-		if(len(message) > 0):	#check if message is valid
-			# pck = package(id,'DATA',path,message,self.mac,destination)	#new package with the message
-			self.network_layer.send_pck()	
+		self.network_layer.send_pck(message,destination)		
 
 	def is_reacheable(self,neighbor):	#check if neighbor host is reacheable
 		first_part = ((self.positionx - neighbor.positionx)**2)
