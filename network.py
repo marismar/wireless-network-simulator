@@ -12,6 +12,7 @@ class network_layer:
 		self.host = host
 		self.table = routing_table()
 		self.pending_pck = []
+		self.received_pck = []
 
 	def send_pck(self,message,destination):	#to link layer
 		if(len(message) > 0):	#check if message is valid
@@ -21,7 +22,11 @@ class network_layer:
 
 
 	def create_RREQ_pck(self,pck):
-		
+		self.pending_pck.append(pck)
+		pck_RREQ = package(network_layer._id_pck,'RREQ',[],self.host.get_mac(),pck.get_destination())
+		network_layer._id_pck += 1
+		pck_RREQ.add_path(self.host.get_mac())
+		self.host.link.sending_request(pck_RREQ)
 
 	def create_RREP_pck(self,pck_RREQ):
 		pck_RREP = package(network_layer._id_pck,'RREP',[],self.host.get_mac(),pck_RREQ.get_originator())
@@ -31,6 +36,16 @@ class network_layer:
 		for obj in path_RREQ:
 			pck_RREP.add_path(obj)
 		return pck_RREP
+
+	def add_received_pck(self,pck):
+		try:
+		    self.received_pck.index(pck.get_id())
+		except ValueError:
+		    self.received_pck.append(pck.get_id())
+		    return True
+		else:
+		    return False
+		
 
 	def receive_pck(self,pck):	#receive a package from link layer
 		if(pck.get_originator() == self.host.get_mac()): #if the receptor is the package originator
@@ -42,8 +57,7 @@ class network_layer:
 		if(not self.add_received_pck(pck)):	#add the package to the received list and check
 			return #ignore the package if it already in the list
 
-		if(pck.get_type() == 'DATA' and pck.get_destination() == self.host.get_mac()): #if the receptor is the package destination
-			print(f'Host {host.get_mac()} has received the package {pck.get_cpk_id()}')
+		if(pck.get_type() == 'DATA' and pck.get_destination() = self.host.get_mac()): #if the receptor is the package destination
 			pck.get_contents() #receive contents of the package
 			#IMPORTANT: write it in a log file
 
@@ -111,15 +125,6 @@ class network_layer:
 	def check_send(self):
 		for i in range(len(self.pending_pck)):	#check all pending packages that wait for a route
 			pck = self.pending_pck[0]
-
-			if(self.table.check_route(pck.get_destination()))
-				pck.add_next(self.table.get_next_to(pck.get_destination()))
-				self.host.link.sending_request(pck)
-				self.pending_pck.pop(0)	#remove the package 
-			else:
-				self.pending_pck.pop(0)	#remove the package
-				self.pending_pck.append(pck)	#move the first package to the end of a list
-
 			if(self.table.check_route(pck.get_destination())) #if there is a route to destination host
 				pck.add_next(self.table.get_next_to(pck.get_destination()))	#get the next in routing table and add to package
 				self.host.link.sending_request(pck) #send the package to link layer
@@ -127,11 +132,3 @@ class network_layer:
 			else:	#if there is no route to destination in routing table 
 				self.pending_pck.pop(0)	#remove the package from the list
 				self.pending_pck.append(pck)	#add the first package to the end of a list
-
-				
-
-	def add_received_pck(self,pck):
-		pass
-
-	def function():
-		pass
