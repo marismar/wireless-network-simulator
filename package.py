@@ -36,3 +36,10 @@ class package:
 
 	def get_destination(self):	#returns the destination
 		return self.destination
+
+	def get_cpk_id():
+		return self.id
+
+	def package_info(self):
+		print(f'Package {self.get_cpk_id()} from {self.get_originator()} to Destination:{self.get_destination()}')
+		print(f'Has contents :[{self.get_contents()}] AND Type: {self.get_type()}')
