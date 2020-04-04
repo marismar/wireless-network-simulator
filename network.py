@@ -14,7 +14,7 @@ class network_layer:
 		pass
 
 	def receive_pck(self,pck):	#receive a package from link layer
-		if(pck.get_originator() == self.host.get_mac()) #if the receptor is the package originator
+		if(pck.get_originator() == self.host.get_mac()): #if the receptor is the package originator
 			return	#ignore the package
 
 		if((pck.get_type() == 'RREP' or pck.get_type() == 'DATA') and pck.get_next() != self.host.get_mac()):
@@ -35,10 +35,10 @@ class network_layer:
 				pck.add_next([]) #send a RREQ package to all neighbors
 				self.create_RREQ_pck(pck)
 
-		elif(pck.get_type() == 'RREQ' and pck.get_destination() != self.host.get_mac()): #if the host is not the destination
+		elif(pck.get_type() == 'RREQ' and pck.get_destination() != self.host.get_mac()): #if the package is RREQ e the receptor is not the destination
 
 
-		elif(pck.get_type() == 'RREQ' and pck.get_destination() == self.host.get_mac()):
+		elif(pck.get_type() == 'RREQ' and pck.get_destination() == self.host.get_mac()): #if the package is RREQ e the receptor is the destination
 
 
 		elif(pck.get_type() == 'RREP' and pck.get_destination() != self.host.get_mac()): #if the package is RREP e the receptor is not the destination

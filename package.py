@@ -12,7 +12,15 @@ class package:
 		self.next = path[0]
 		self.contents = contents
 		self.originator = originator
-		self.destination = destination 	
+		self.destination = destination
+
+	def add_path(self,host):
+	 	if(self.type == 'RREQ' or self.type == 'RREP'):
+	 		self.path.append(host)
+
+	def add_next(self,next):
+		if(self.type == 'DATA' or self.type == 'RREP'):
+			self.next = next	
 
 	def get_type(self):	#returns the type
 		return self.type
