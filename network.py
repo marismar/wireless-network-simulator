@@ -18,8 +18,11 @@ class network_layer:
 		if(len(message) > 0):	#check if message is valid
 			pck = package(network_layer._id_pck,'DATA',message,self.host.get_mac(),destination)	#new package with the message
 			network_layer._id_pck += 1
-			#CONTINUAR AQUIII!!
-
+			if(self.table.check_route(destination)):
+				pck.add_next(self.table.get_next_to(destination))
+				self.host.link.sending_request(pck)
+			else:
+				create_RREQ_pck(pck)
 
 	def create_RREQ_pck(self,pck):
 		self.pending_pck.append(pck)
@@ -136,6 +139,3 @@ class network_layer:
 		elif(pck.get_type() == 'RREP' and pck.get_destination() == self.host.get_mac()): #if the package is RREP e the receptor is the destination
 			self.table.save_route(pck.get_path()) #save the route
 			self.check_send()	#check the route and send the package			
-
-
-	
