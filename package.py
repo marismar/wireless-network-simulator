@@ -14,11 +14,11 @@ class package:
 		self.originator = originator
 		self.destination = destination
 
-	def add_path(self,host):
+	def add_path(self,host): #add a host to the path
 	 	if(self.type == 'RREQ' or self.type == 'RREP'):
 	 		self.path.append(host)
 
-	def add_next(self,next):
+	def add_next(self,next): #add a host as next
 		if(self.type == 'DATA' or self.type == 'RREP'):
 			self.next = next	
 
@@ -37,7 +37,7 @@ class package:
 	def get_destination(self):	#returns the destination
 		return self.destination
 
-	def get_id():
+	def get_id():	#returns the id
 		return self.id
 
 	def package_info(self):
