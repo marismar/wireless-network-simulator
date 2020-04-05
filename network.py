@@ -45,8 +45,18 @@ class network_layer:
 		    return True
 		else:
 		    return False
-		
 
+	def check_send(self):
+		for i in range(len(self.pending_pck)):	#check all pending packages that wait for a route
+			pck = self.pending_pck[0]
+			if(self.table.check_route(pck.get_destination())) #if there is a route to destination host
+				pck.add_next(self.table.get_next_to(pck.get_destination()))	#get the next in routing table and add to package
+				self.host.link.sending_request(pck) #send the package to link layer
+				self.pending_pck.pop(0)	#remove the package from the list
+			else:	#if there is no route to destination in routing table 
+				self.pending_pck.pop(0)	#remove the package from the list
+				self.pending_pck.append(pck)	#add the first package to the end of a list
+		
 	def receive_pck(self,pck):	#receive a package from link layer
 		if(pck.get_originator() == self.host.get_mac()): #if the receptor is the package originator
 			return	#ignore the package
@@ -80,7 +90,6 @@ class network_layer:
 						self.check_send() #check the route to send
 				self.host.link.sending_request(pck)	#send the package to link layer
 
-
 		elif(pck.get_type() == 'RREQ' and pck.get_destination() == self.host.get_mac()): #if the package is RREQ e the receptor is the destination
 			pck.add_path(self.host.get_mac())
 			pck_RREP = create_RREP_pck(pck)
@@ -90,8 +99,15 @@ class network_layer:
 				neighbor = path[neighbor_position]
 			else:
 				neighbor = []
-			#CONTINUAR DAQUI!!!!!!!
-
+			if(neighbor == [] or (not self.host.is_reacheable(neighbor))):
+				pck_RREP.add_next([])
+				create_RREQ_pck(pck_RREP)
+				return
+			else:
+				if(self.host.is_reacheable(neighbor)):
+					self.table.save_route(pck_RREP.get_path())
+					self.check_send()
+					self.host.link.sending_request(pck_RREP)
 
 		elif(pck.get_type() == 'RREP' and pck.get_destination() != self.host.get_mac()): #if the package is RREP e the receptor is not the destination
 			count = 0
@@ -122,13 +138,4 @@ class network_layer:
 			self.check_send()	#check the route and send the package			
 
 
-	def check_send(self):
-		for i in range(len(self.pending_pck)):	#check all pending packages that wait for a route
-			pck = self.pending_pck[0]
-			if(self.table.check_route(pck.get_destination())) #if there is a route to destination host
-				pck.add_next(self.table.get_next_to(pck.get_destination()))	#get the next in routing table and add to package
-				self.host.link.sending_request(pck) #send the package to link layer
-				self.pending_pck.pop(0)	#remove the package from the list
-			else:	#if there is no route to destination in routing table 
-				self.pending_pck.pop(0)	#remove the package from the list
-				self.pending_pck.append(pck)	#add the first package to the end of a list
+	
