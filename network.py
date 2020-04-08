@@ -10,7 +10,7 @@ class network_layer:
 
 	def __init__(self,host):
 		self.host = host
-		self.table = routing_table()
+		self.table = routing_table(host)
 		self.pending_pck = []
 		self.received_pck = []
 
