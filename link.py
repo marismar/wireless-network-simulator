@@ -3,6 +3,7 @@ from package import package
 from network import network_layer
 from physical import physical_layer
 from table import routing_table
+from master import master
 
 class link_layer:
 	def __init__(self,host):

@@ -3,6 +3,7 @@ from link import link_layer
 from network import network_layer
 from package import package
 from table import routing_table
+from master import master
 import weakref
 import math
 

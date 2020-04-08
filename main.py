@@ -6,7 +6,4 @@ from host import host
 from package import package
 from master import master
 
-print(10)
-
-m = master()
-m.send_permission()
+print('ok')
