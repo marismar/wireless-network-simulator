@@ -1,9 +1,9 @@
-from host import host
-from link import link_layer
-from network import network_layer
-from physical import physical_layer
-from table import routing_table
-from master import master
+#from host import host
+#from link import link_layer
+#from network import network_layer
+#from physical import physical_layer
+#from table import routing_table
+#from master import master
 
 class package:
 	def __init__(self,id,type,contents,originator,destination):
@@ -38,9 +38,14 @@ class package:
 	def get_destination(self):	#returns the destination
 		return self.destination
 
-	def get_id():	#returns the id
+	def get_id(self):	#returns the id
 		return self.id
 
+	def get_next(self):
+		return self.next
+
 	def package_info(self):
-		print(f'Package {self.get_id()} from {self.get_originator()} to Destination:{self.get_destination()}')
-		print(f'Has contents :[{self.get_contents()}] AND Type: {self.get_type()}')
+		print('* '*24)
+		print(f'* Package ID[{self.get_id()}] from HOST {self.get_originator()} to Destination:{self.get_destination()}  *')
+		print(f'* Has contents :[{self.get_contents()}] AND Type: {self.get_type()} *')
+		print('* '*24)

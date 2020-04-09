@@ -1,9 +1,9 @@
-from host import host
-from package import package
-from link import link_layer
-from physical import physical_layer
-from network import network_layer
-from master import master
+#from host import host
+#from package import package
+#from link import link_layer
+#from physical import physical_layer
+#from network import network_layer
+#from master import master
 
 class routing_table:
 	def __init__(self,host):
@@ -13,6 +13,7 @@ class routing_table:
 		self.latest_search = []	#save the last search destination:next
 		
 	def check_route(self,destination):	#check if there is a route 
+		print('********* CHEGUEI NA TABELA ********\n')
 		for obj in self.routing:	
 			if(obj == destination): #save the destination and next host as latest search
 				self.latest_search[0] = destination
@@ -29,9 +30,12 @@ class routing_table:
 	def save_route(self,path):	#save the all path to the destination 
 		if(not path in self.saved_routes):	#check if there is already a saved route to the destination
 			self.saved_routes.append(path) #if there is no route, save it
-		iterator = path.index(self.host.get_mac()) #get the index of the host in path
+		
+		# ORIGINALY -> iterator = path.index(self.host.get_mac())
+		iterator = path.index(self.host) #get the index of the host in path
 		is_neighbor = True
 		neighbor_mac = -1	#initiate a neighbor's mac address as -1(invalid) 
+		
 		for obj in range(iterator,len(path)):
 			if (is_neighbor):	#if is_neighbor is true
 				if(self.host.get_mac() != path[obj]):	#if the node in path is not the host
@@ -40,9 +44,12 @@ class routing_table:
 					is_neighbor = False 	#the node is not neighbor of the host
 			else:	#if the node in path is the host
 				self.routing[path[obj]] = neighbor_mac	#save node:neighbor as destination:next
+		
 		is_neighbor = True 	#the node is neighbor of the host
 		path.reverse()	#reverse the path to save it
-		iterator = path.index(self.host.get_mac())	#get the index of the host in path
+		iterator = path.index(self.host)	#get the index of the host in path
+		# CHANGE -> path.index(self.host.get_mac()) 
+
 		for obj in range(iterator,len(path)):
 			if(is_neighbor):	#if is_neighbor is true 
 				if(self.host.get_mac() != path[obj]):	#if the node in path is not the host
