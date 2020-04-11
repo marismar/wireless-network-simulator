@@ -1,9 +1,5 @@
-#from host import host
 from package import package
-from network import network_layer
-#from physical import physical_layer
-from table import routing_table
-#from master import master
+from network import Network_layer
 
 class link_layer:
 	def __init__(self,host):
@@ -16,11 +12,11 @@ class link_layer:
 
 	def sending_request(self,pck):
 		self.pending_pck.append(pck)	#add the package to pending list
-		print(f'\nList of package in link_layer :{self.pending_pck}\n')
+		print(f'\n \033[33m +++++++ L2: List of package in link_layer :{self.pending_pck} \033[37m \n')
 		self.host.master.add_queue(self.host)	#host gets in the master queue
 
 	def send_pck_physical(self): #send a package to physical layer
 	 	self.package = self.pending_pck.pop(0)
-	 	#print(f'IN LINK_LAYER :') # Working OK
-	 	#package.package_info()
+	 	print(f'\033[33m +++++++ L2: LINK_LAYER OF HOST[{self.host.get_mac()}]\033[37m \n')
+	 	self.package.package_info()
 	 	self.host.physical.send_pck(self.package) 

@@ -1,166 +1,194 @@
-#from host import host
 from package import package
-#from link import link_layer
-#from physical import physical_layer
-from table import routing_table
-from master import master
 
-class network_layer:
+class Network_layer:
 
-	_id_pck = 0
+    _id_pck = 0
 
-	def __init__(self,host):
-		self.host = host
-		self.table = routing_table(host)
-		self.pending_pck = []
-		self.received_pck = []
+    def __init__(self,host):
+        self.host = host
+        self.pending_pck = []
+        self.received_pck = []
+        self.temp_rtable = []
+        # temporary route table 
 
-	def send_pck(self,message,destination):	#to link layer
-		if len(message) > 0 :	#check if message is valid
-			pck = package(network_layer._id_pck,'DATA',message,self.host.get_mac(),destination)	#new package with the message
-			network_layer._id_pck += 1
-			
-			print("I am at network_layer")
-			pck.package_info() # prints the package info
-			if self.table.check_route(destination):
-				pck.add_next(self.table.get_next_to(destination))
-				self.host.link.sending_request(pck)
-			else:
-				self.create_RREQ_pck(pck)
+    def add_received_pck(self, pck_id):
+        try:
+            self.received_pck.index(pck_id)
+        except :
+            self.received_pck.append(pck_id)
+            return True
+        return False
 
-	def create_RREQ_pck(self,pck):
-		self.pending_pck.append(pck)
-		pck_RREQ = package(network_layer._id_pck,'RREQ',[],self.host.get_mac(),pck.get_destination())
-		network_layer._id_pck += 1
-		pck_RREQ.add_path(self.host) # ****** elf.host.get_mac()
-		self.host.link.sending_request(pck_RREQ)
+    #Function to CREATE and SEND a DATA pck to **LINK LAYER**
+    def send_pck(self,message,destination):
+        if len(message) > 0 :	#check if message is valid
+            
+            print('* '*20)
+            print("* Creating a package in network_layer *")
+            print('* '*20, '\n')
+            
+            #new package with the message
+            pck = package(Network_layer._id_pck,'DATA',message,self.host.get_mac(),destination)
+            pck.package_info() # prints the package information
+            Network_layer._id_pck += 1 # update the id
 
-	
-	def create_RREP_pck(self,pck_RREQ):
-		pck_RREP = package(network_layer._id_pck,'RREP',[],self.host.get_mac(),pck_RREQ.get_originator())
-		network_layer._id_pck += 1
-		path_RREQ = pck_RREQ.get_path()
-		path_RREQ.reverse()
-		
-		for obj in path_RREQ:
-			pck_RREP.add_path(obj)
-		return pck_RREP
+            # checks if the destination is my neighbor
+            nb = self.host.get_neighbors()
+            var = False
+            for obj in nb:
+                if destination == obj.get_mac():
+                    var = True
+                    break    
+            # destination is a host's neighbor
+            if var:
+                self.host.link.sending_request(pck)
 
-	
-	def add_received_pck(self,pck):
-		try:
-		    self.received_pck.index(pck.get_id())
-		except ValueError:
-		    self.received_pck.append(pck.get_id())
-		    return True
-		else:
-		    return False
+            # if is not my neighbor, then check if I have a way to him
+            
+            if self.temp_rtable != []:
+                print("\033[36m\t\tL3: I HAVE A ROUTE TABLE \033[37m")
+                # ** set the next jump (still in progress)**
+                self.host.link.sending_request(pck)
+            
+            # if the host can't get into the destination, then it make a RREQ
+            else :
+                print(f"\033[36m +++++++++ L3: HOST{self.host.get_mac()} HAS NO ROUTE TO {destination}\033[37m")
+                self.create_RREQ_pck(pck)
+            
 
-	
-	def check_send(self):
-		for i in range(len(self.pending_pck)):	#check all pending packages that wait for a route
-			pck = self.pending_pck[0]
-			
-			if(self.table.check_route(pck.get_destination())): #if there is a route to destination host
-				pck.add_next(self.table.get_next_to(pck.get_destination()))	#get the next in routing table and add to package
-				self.host.link.sending_request(pck) #send the package to link layer
-				self.pending_pck.pop(0)	#remove the package from the list
-			
-			else:	#if there is no route to destination in routing table 
-				self.pending_pck.pop(0)	#remove the package from the list
-				self.pending_pck.append(pck)	#add the first package to the end of a list
-		
-	
-	def receive_pck(self,pck):	#receive a package from link layer
-		if(pck.get_originator() == self.host.get_mac()): #if the receptor is the package originator
-			return	#ignore the package
+    # create a REQUEST pck and send to link_layer
+    def create_RREQ_pck(self,pck):
+        self.pending_pck.append(pck) # save the package to send later
+        
+        pck_RREQ = package(Network_layer._id_pck,'RREQ',"I am a RREQ",self.host.get_mac(),pck.get_destination())
+        Network_layer._id_pck += 1
+        # if the host makes this type of pck, is saves to a list, so it won't send again
+        self.received_pck.append(pck_RREQ.get_id())
 
-		if((pck.get_type() == 'RREP' or pck.get_type() == 'DATA') and pck.get_next() != self.host.get_mac()):
-			return #ignore the package
+        print(f'\t\t\033[36m HOST[{self.host.get_mac()}] IS CREATING A RREQ TO {pck.get_destination()}\033[37m\n')
+        print(f'\t\t\033[36m HOST[{self.host.get_mac()}] IS ADDING ITSELF TO THE PATH\033[37m\n')
 
-		if(not self.add_received_pck(pck)):	#add the package to the received list and check
-			return #ignore the package if it already in the list
+        pck_RREQ.add_path(self.host) # adding itself on the path
+        
+        #print(f'\033[36m * HOST[{self.host.get_mac()}] is sending a RREQ package to {pck.get_destination()} *\033[37m')
+        self.host.link.sending_request(pck_RREQ) # send a request to master
+        
 
-		if(pck.get_type() == 'DATA' and pck.get_destination() == self.host.get_mac()): #if the receptor is the package destination
-			print('*'*20)
-			print(f'* I am host{self.host.get_mac()} and received a package from {pck.get_destination()} *')
-			print('*'*20)
-			pck.get_contents() #receive contents of the package
-			#IMPORTANT: write it in a log file
+    # create a REPLY pck and send to link_layer
+    def create_RREP_pck(self,pck_RREQ):
+        pck_RREP = package(Network_layer._id_pck,'RREP',"i am a RREP",self.host.get_mac(),pck_RREQ.get_originator())
+        
+        print(f'\033[36m --- HOST[{self.host.get_mac()}] is sending a RREP to HOST[{pck_RREQ.get_originator()}] ---\033[37m')
+        Network_layer._id_pck += 1
+        
+        # get the way back
+        way_back = pck_RREQ.get_path()
+        for way in way_back:
+            # save the way that pck has being through
+            pck_RREP.add_path(way)
 
-		elif(pck.get_type() == 'DATA' and pck.get_destination() != self.host.get_mac()): #if the receptor is next at the route
-			if(self.table.check_route(pck.get_destination())): #check if there is a route
-				pck.add_next(self.table.get_next_to(pck.get_destination()))	#add next to the route
-				self.host.link.sending_request(pck)				
-			else:	#if there is not a route in routing table
-				pck.add_next([]) #send a RREQ package to all neighbors
-				self.create_RREQ_pck(pck)
+        way_back.reverse()
 
-		elif(pck.get_type() == 'RREQ' and pck.get_destination() != self.host.get_mac()): #if the package is RREQ e the receptor is not the destination
-			pck.add_path(self.host)#pck.add_path(self.host.get_mac())
-			neighbor_position = len(pck.get_path()) - 2
+        # The next jump is who sent to me
+        next = way_back.pop(1)
+        pck_RREP.add_next(next.get_mac())
+        
+        #than send to link layer
+        self.host.link.sending_request(pck_RREP) 
 
-			#print(f'CAMINHO ----> {pck.get_path()}')
 
-			if(neighbor_position < (len(pck.get_path()) - 1)):
-				path = pck.get_path()
-				neighbor = path[neighbor_position]
-				
-				#print(f'I AM AT NETWORK_LAYER --> HOST[{self.host.get_mac()}]')
-				#print(f'MY NIGHBOR IS -- >[{neighbor.get_mac()}]')
-				
-				if(self.host.is_reacheable(neighbor)):	#check and if its reacheable 
-						self.table.save_route(path)	#save the route
-						self.check_send() #check the route to send
-				self.host.link.sending_request(pck)	#send the package to link layer
+    # Function to processe all packages received
+    def receive_pck(self,pck):
+        actual_mac = self.host.get_mac()
+        
+        if pck.get_type() == 'DATA':  
+            # final point gets the package              
+            if pck.get_destination() == self.host.get_mac():
+                if self.add_received_pck(pck.get_id()):
+                    print('\033[33m *'*28)
+                    print(f'* I AM HOST[{self.host.get_mac()}] AND RECEIVED THE PACKAGE [{pck.get_contents()}] *')
+                    print(' *'*28, '\033[37m')
+                else:
+                    pass
+            
+            print(f'\n\t \033[36m HOST[{actual_mac}] HAS PACK ? =======>{pck.get_next() == self.host.get_mac()} \033[37m')
+            
+            # the package is not for the actual host, it's on the path
+            if (pck.get_destination() != self.host.get_mac() and pck.get_next() == self.host.get_mac()):
+                print(f'\n \033[36m +++++ L3: HOST[{self.host.get_mac()}] RECIEVING A DATA PCK, BUT IS NOT MYNE -->[{pck.get_destination()}]\033[37m')
+                if self.add_received_pck(pck.get_id()):
+                    path = pck.get_path()
+                    #print(f'THE PATH IS :{path}')
+                    # get the next jump
+                    next_jp = path.index(self.host)+1
+                    next_jp = path[next_jp]
+                    print(f'\033[36m NEXT POINT IS {next_jp.get_mac()}')
+                    pck.add_next(next_jp.get_mac())
 
-		elif(pck.get_type() == 'RREQ' and pck.get_destination() == self.host.get_mac()): #if the package is RREQ e the receptor is the destination
-			pck.add_path(self.host)# *** ORIGINALY -> self.host.get_mac()
-			pck_RREP = self.create_RREP_pck(pck)
-			neighbor_position = 1
-			
-			if(neighbor_position < (len(pck.get_path()) - 1)):
-				path = pck_RREP.get_path()
-				neighbor = path[neighbor_position]
-			else:
-				neighbor = []
-			
-			if(neighbor == [] or (not self.host.is_reacheable(neighbor))):
-				pck_RREP.add_next([])
-				self.create_RREQ_pck(pck_RREP)
-				return
-			else:
-				if(self.host.is_reacheable(neighbor)):
-					self.table.save_route(pck_RREP.get_path())
-					self.check_send()
-					self.host.link.sending_request(pck_RREP)
+                    #then send the package
+                    self.host.link.sending_request(pck)
+                else:
+                    pass
+                
 
-		elif(pck.get_type() == 'RREP' and pck.get_destination() != self.host.get_mac()): #if the package is RREP e the receptor is not the destination
-			count = 0
-			host_position = -1
-			
-			for obj in pck.get_path():	#check the host position in the path
-				if(obj == self.host.get_mac()):	
-					host_position = count #when it is found, save it
-					break
-				count += 1
-			
-			if(host_position < 0):	#if the receptor host is not in the path
-				pck.add_next([]) #send a RREQ package to all neighbors
-				self.create_RREQ_pck(pck)
-			else:	#if the receptor is in the path
-				if(host_position < (len(pck.get_path()) - 1)):
-					path = pck.get_path()
-					neighbor = path[host_position+1]	#get next host in the path
-					if(self.host.is_reacheable(neighbor)):	#check and if its reacheable 
-						self.table.save_route(path)	#save the route
-						self.check_send() #check the route to send
-						pck.add_next(neighbor)	#add the neighbor as next
-						self.host.link.sending_request(pck)	#send the package to link layer
-				else:	#if the next host is not save in the path
-					pck.add_next([]) #send a RREQ package to all neighbors
-					self.create_RREQ_pck(pck)
+        if pck.get_type() == 'RREQ': # process request packages
+            # if the request is for the actual host, then it must reply
+            if pck.get_destination() == self.host.get_mac():
+                if self.add_received_pck(pck.get_id()): # check if already have this pck 
+                    pck.add_path(self.host)# add itself in the path
+                        
+                    # creates a reply package 
+                    pck_RREP = self.create_RREP_pck(pck)
+                    # make a function or an attribute to add this new route
+                else:
+                    pass
+                    
+            else: # the request is not for the actual host
+                if self.add_received_pck(pck.get_id()):
+                    # ** verify the route table ** (still in progress)
+                    # if has no way, just make a broadcast
+                    pck.add_path(self.host)
+                    self.host.link.sending_request(pck)
+                
+        
+        if pck.get_type() == 'RREP':
+            # checks if the actual host is the destination and still doesn't have this package
+            if pck.get_destination() == self.host.get_mac() and self.add_received_pck(pck.get_id()):
+                print(f"\n\033[36m +++++++++ L3: HOST[{self.host.get_mac()}] MUST SEND THE DATA PACKAGE \033[37m")
+                
+                data_pck = self.pending_pck.pop(0) # remove the 1rs pck from remaining ones
+                way_back = pck.get_path()
+                
+                # save the way that pck has being through
+                for way in way_back:
+                    data_pck.add_path(way)
+                    print(f'\n\033[36m GOT MY REPLY AND THAT IS THE WAY =>{way.get_mac()}\033[37m')
+                
+                #add next
+                try:
+                    next_jump = way_back.index(self.host)+1 # check the position of actual host
+                except Exception as e:
+                    # must find a way function
+                    print(e)
+                    
+                print(f'MY DATA PACK PATH IS => {data_pck.get_path()}')
+                next_jump = way_back[next_jump] #get the next jump
+                data_pck.add_next(next_jump.get_mac())# add the next jump to the pck information
+                #print(f'\nL3: NEXT POINT IS {next_jump.get_mac()}')
+                #send data
+                self.host.link.sending_request(data_pck)
+            
 
-		elif(pck.get_type() == 'RREP' and pck.get_destination() == self.host.get_mac()): #if the package is RREP e the receptor is the destination
-			self.table.save_route(pck.get_path()) #save the route
-			self.check_send()	#check the route and send the package			
+            # the actual host is the next jump and is getting this pck for the 1rs time
+            elif pck.get_next() == self.host.get_mac() and self.add_received_pck(pck.get_id()):
+                way_back = pck.get_path()
+                
+                try:
+                    next_jump = way_back.index(self.host)-1 # check the position of actual host
+                except Exception as e:
+                    # ** must find a way function **
+                    print(e)
+                    
+                next_jump = way_back[next_jump] #get the next jump
+                pck.add_next(next_jump.get_mac())# add the next jump to the pck information
+                self.host.link.sending_request(pck)

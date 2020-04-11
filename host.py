@@ -1,11 +1,10 @@
 from physical import physical_layer
 from link import link_layer
-from network import network_layer
 from package import package
-from table import routing_table
 from master import master
 import weakref
 import math
+from network import Network_layer
 
 class host:
 
@@ -14,7 +13,7 @@ class host:
 	def __init__(self, mac, x, y, master, reach):	#delfaut constructor
 		self.physical = physical_layer(self)
 		self.link = link_layer(self)
-		self.network = network_layer(self)
+		self.network = Network_layer(self)
 		self.master = master
 		self.reach = reach
 		self.mac = mac
@@ -35,6 +34,8 @@ class host:
 
 	def send_message(self,message,destination):	#send the package to network layer
 		self.network.send_pck(message,destination)		
+		#if len(message) > 0 :	#check if message is valid
+		#pck = package(network_layer.id_pck,'DATA',message,self.get_mac(),destination)	#new package with the message
 
 	def is_reacheable(self,neighbor):	#check if neighbor host is reacheable
 		first_part = ((self.positionx - neighbor.positionx)**2)

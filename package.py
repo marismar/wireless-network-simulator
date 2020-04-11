@@ -1,9 +1,3 @@
-#from host import host
-#from link import link_layer
-#from network import network_layer
-#from physical import physical_layer
-#from table import routing_table
-#from master import master
 
 class package:
 	def __init__(self,id,type,contents,originator,destination):
@@ -16,8 +10,9 @@ class package:
 		self.destination = destination
 
 	def add_path(self,host): #add a host to the path
-	 	if(self.type == 'RREQ' or self.type == 'RREP'):
-	 		self.path.append(host)
+	 	#if(self.type == 'RREQ' or self.type == 'RREP'):
+	 		#print(f'\033[33m \nADDING {host.get_mac()} TO THE ROUTE\n\033[37m')
+		self.path.append(host)
 
 	def add_next(self,next): #add a host as next
 		if(self.type == 'DATA' or self.type == 'RREP'):
@@ -27,6 +22,10 @@ class package:
 		return self.type
 
 	def get_path(self):	#returns the path
+		#print('GETTING THE PATH')
+		#print(f'{self.path}')
+		#for obj in self.path:
+		#	print(f'{obj.get_mac()}')
 		return self.path
 
 	def get_contents(self):	#returns the contents
@@ -46,6 +45,6 @@ class package:
 
 	def package_info(self):
 		print('* '*24)
-		print(f'* Package ID[{self.get_id()}] from HOST {self.get_originator()} to Destination:{self.get_destination()}  *')
+		print(f'* Package ID[{self.get_id()}] from HOST {self.get_originator()} to Destination: {self.get_destination()} *')
 		print(f'* Has contents :[{self.get_contents()}] AND Type: {self.get_type()} *')
 		print('* '*24)
