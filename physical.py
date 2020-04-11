@@ -1,5 +1,6 @@
 from package import package
 from link import link_layer
+import logging
 
 class physical_layer:
 	def __init__(self,host):
@@ -12,6 +13,8 @@ class physical_layer:
 		for obj in neighbors:	#send the package in broadcast to all neighbors
 			self.list_send.append(obj)#
 			print(f'\033[32m IN PHYSICAL_LAYER , SENDING TO -> HOST[{self.host.get_mac()}] SENDING TO -> HOST[{obj.get_mac()}] \033[37m\n')
+			
+			logging.info(f' I am host[{self.host.get_mac()}], and I am sending a pack to neighbor[{obj.get_mac()}]')
 			obj.physical.receive_pck(pck)	#each neighbor host receive the package
 
 

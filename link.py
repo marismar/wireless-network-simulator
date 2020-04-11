@@ -1,5 +1,6 @@
 from package import package
 from network import Network_layer
+import logging
 
 class link_layer:
 	def __init__(self,host):
@@ -13,6 +14,7 @@ class link_layer:
 	def sending_request(self,pck):
 		self.pending_pck.append(pck)	#add the package to pending list
 		print(f'\n \033[33m +++++++ L2: List of package in link_layer :{self.pending_pck} \033[37m \n')
+		logging.info(f' Sending a request to Master from host[{self.host.get_mac()}]')
 		self.host.master.add_queue(self.host)	#host gets in the master queue
 
 	def send_pck_physical(self): #send a package to physical layer

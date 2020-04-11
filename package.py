@@ -1,3 +1,4 @@
+import logging
 
 class package:
 	def __init__(self,id,type,contents,originator,destination):
@@ -48,3 +49,8 @@ class package:
 		print(f'* Package ID[{self.get_id()}] from HOST {self.get_originator()} to Destination: {self.get_destination()} *')
 		print(f'* Has contents :[{self.get_contents()}] AND Type: {self.get_type()} *')
 		print('* '*24)
+
+		#logging.info('* '*24)
+		#logging.info(f'* Package ID[{self.get_id()}] from HOST {self.get_originator()} to Destination: {self.get_destination()} *')
+		#logging.info(f'* Has contents :[{self.get_contents()}] AND Type: {self.get_type()} *')
+		#logging.info('* '*24)

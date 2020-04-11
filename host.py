@@ -1,10 +1,11 @@
 from physical import physical_layer
 from link import link_layer
+from network import Network_layer
 from package import package
 from master import master
 import weakref
 import math
-from network import Network_layer
+import logging
 
 class host:
 
@@ -34,8 +35,7 @@ class host:
 
 	def send_message(self,message,destination):	#send the package to network layer
 		self.network.send_pck(message,destination)		
-		#if len(message) > 0 :	#check if message is valid
-		#pck = package(network_layer.id_pck,'DATA',message,self.get_mac(),destination)	#new package with the message
+		
 
 	def is_reacheable(self,neighbor):	#check if neighbor host is reacheable
 		first_part = ((self.positionx - neighbor.positionx)**2)
