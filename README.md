@@ -12,23 +12,17 @@
 
 <!-- Add a workflow description: Marismar -->
 
-## How to run the project
+## Table of Contents
 
-Go into the file project then open the terminal and write the command bellow :
+* [Layers Description](#layers-description)
 
-```
-python main.py
-```
+* [Input setup](#input-setup)
+  * [Creating a host](#creating-a-host)
+  * [Creating a data package](#creating-a-data-package)
 
-## 2.0 Input setup
- 
-### 2.1 How create a host
+* [Run tests](#run-tests)
 
-Create a host by wirting ` new_host = host(host_id, x_position, y_position, master, range_ratio) ` into the main.js. The **master** <br> is the entity that decides which host will send data, so you must create only one master. 
-
-### 2.2 How host send data
-
-Create a data package for any host by : `host_name.send_message("message content", receiver_host_id)`
+* [Authors](#authors)
 
 
 ## Layers description
@@ -42,8 +36,20 @@ Write some description
 ### Network
 
 
+## Input setup
+ 
+### Creating a host
+
+Create a host by wirting ` new_host = host(host_id, x_position, y_position, master, range_ratio) ` into the main.js. The **master** <br> is the entity that decides which host will send data, so you must create only one master. 
+
+### Creating a data package
+
+Create a data package for any host by : `host_name.send_message("message content", receiver_host_id)`
+
 
 ## Run tests
+
+Go into the file project then open the terminal and write the command bellow :
 
 ```
 python main.py
