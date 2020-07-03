@@ -10,22 +10,43 @@
 
 > A wireless network simulator developed in python, as a final project of the wireless networks course at UFPB 📡
 
-## Install
+<!-- Add a workflow description: Marismar -->
 
-```sh
-yarn install
-```
+## How to run the project
 
-## Usage
-
-```sh
 Go into the file project then open the terminal and write the command bellow :
+
 ```
+python main.py
+```
+
+## 2.0 Input setup
+ 
+### 2.1 How create a host
+
+Create a host by wirting ` new_host = host(host_id, x_position, y_position, master, range_ratio) ` into the main.js. The **master** <br> is the entity that decides which host will send data, so you must create only one master. 
+
+### 2.2 How host send data
+
+Create a data package for any host by : `host_name.send_message("message content", receiver_host_id)`
+
+
+## Layers description
+
+Write some description
+
+### Phisical
+
+### Link
+
+### Network
+
+
 
 ## Run tests
 
-```sh
-yarn test
+```
+python main.py
 ```
 
 ## Author
