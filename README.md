@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <h1 align="center">Welcome to Wireless Network Simulator 👋</h1>
 <p>
   <a href="https://www.overleaf.com/project/5e87ee38b01f50000176e3e6" target="_blank">
