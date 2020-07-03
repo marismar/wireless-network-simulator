@@ -35,6 +35,11 @@ yarn test
 * Github: [@marismarcosta](https://github.com/marismarcosta)
 * LinkedIn: [@marismarcosta](https://linkedin.com/in/marismarcosta)
 
+👤 **Gustavo Eraldo da Silva**
+
+* Github: [@EraldoCi](https://github.com/EraldoCi)
+* LinkedIn: [@gustavoeraldo](https://linkedin.com/in/gustavoeraldo)
+
 ## Show your support
 
 Give a ⭐️ if this project helped you!
