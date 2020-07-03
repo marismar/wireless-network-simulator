@@ -49,7 +49,7 @@ Write some description
 python main.py
 ```
 
-## Author
+## Authors
 
 👤 **Marismar da Costa Silva**
 
