@@ -67,7 +67,7 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2020 [Marismar da Costa Silva](https://github.com/marismarcosta).<br />
+Copyright © 2020 [Marismar da Costa Silva](https://github.com/marismarcosta), [Gustavo Eraldo da Silva](https://github.com/EraldoCi).<br />
 This project is [MIT](https://github.com/marismarcosta/wireless-network/blob/master/LICENSE) licensed.
 
 *****
