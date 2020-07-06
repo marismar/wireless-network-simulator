@@ -1,8 +1,8 @@
-<h1 align="center">Wireless Network Simulator</h1>
+<h1 align="center">Wireless Network Simulator 📡</h1>
 
 
 <h4 align="center">
-  A wireless network simulator developed in python, as a final project of the wireless networks course at UFPB 📡
+  A wireless network simulator developed in python, as a final project of the wireless networks course at UFPB.
 </h4>
 
 <p align="center">
