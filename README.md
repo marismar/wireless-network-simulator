@@ -12,14 +12,24 @@
   <a href="https://github.com/marismarcosta/wireless-network/blob/master/LICENSE" target="_blank">
     <img alt="license: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg" />
   </a>
-  <a href="https://linkedin/com/in/marismarcosta" target="_blank">
-    <img alt="linkedin: marismarcosta" src="https://img.shields.io/badge/linkedin-marismarcosta-blue.svg" />
-  </a>
-  
-  <a href="hhttps://www.linkedin.com/in/gustavoeraldo/" target="_blank">
-    <img alt="linkedin: gustavoeraldo" src="https://img.shields.io/badge/linkedin-gustavoeraldo-blue.svg" />
-  </a>
-  
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/top/marismarcosta/wireless-network?color=7159C1" />
+  <img alt="GitHub language count" src="https://img.shields.io/github/last-commit/marismarcosta/wireless-network?color=7159C1" />
+  <img alt="GitHub language count" src="https://img.shields.io/github/repo-size/marismarcosta/wireless-network?color=7159C1" />
+</p>
+<p align="center">
+    <a href="https://github.com/marismarcosta">
+        <img src="https://img.shields.io/badge/github-marismarcosta-7159C1?logo=GitHub"/>
+    </a>
+    <a href="https://www.linkedin.com/in/marismarcosta/">
+        <img src="https://img.shields.io/badge/linkedin-marismarcosta-blue?logo=linkedin"/>
+    </a>
+    <a href="https://github.com/EraldoCi">
+        <img src="https://img.shields.io/badge/github-gustavoeraldo-7159C1?logo=GitHub"/>
+    </a>
+    <a href="https://www.linkedin.com/in/gustavoeraldo/">
+        <img src="https://img.shields.io/badge/linkedin-gustavoeraldo-blue?logo=linkedin"/>
+    </a>
+    
 </p>
 
 <p align="center">
