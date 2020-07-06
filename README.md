@@ -70,6 +70,3 @@ Give a ⭐️ if this project helped you!
 
 Copyright © 2020 [Marismar da Costa Silva](https://github.com/marismarcosta), [Gustavo Eraldo da Silva](https://github.com/EraldoCi).<br />
 This project is [MIT](https://github.com/marismarcosta/wireless-network/blob/master/LICENSE) licensed.
-
-*****
-###### This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)
