@@ -1,6 +1,5 @@
 <h1 align="center">Wireless Network Simulator 📡</h1>
 
-
 <h4 align="center">
   A wireless network simulator developed in python, as a final project of the wireless networks course at UFPB.
 </h4>
@@ -16,19 +15,17 @@
   <img alt="GitHub language count" src="https://img.shields.io/github/last-commit/marismarcosta/wireless-network?color=78866b" />
   <img alt="GitHub language count" src="https://img.shields.io/github/repo-size/marismarcosta/wireless-network?color=ffa07a" />
   <a href="https://github.com/marismarcosta">
-        <img src="https://img.shields.io/badge/github-marismarcosta-7159C1?logo=GitHub"/>
-    </a>
-    <a href="https://github.com/EraldoCi">
-        <img src="https://img.shields.io/badge/github-gustavoeraldo-7159C1?logo=GitHub"/>
-    </a>
-   <a href="https://www.linkedin.com/in/marismarcosta/">
-        <img src="https://img.shields.io/badge/linkedin-marismarcosta-blue?logo=linkedin"/>
-    </a>
-    <a href="https://www.linkedin.com/in/gustavoeraldo/">
-        <img src="https://img.shields.io/badge/linkedin-gustavoeraldo-blue?logo=linkedin"/>
-    </a>
-    
-
+    <img src="https://img.shields.io/badge/github-marismarcosta-7159C1?logo=GitHub"/>
+  </a>
+  <a href="https://github.com/EraldoCi">
+    <img src="https://img.shields.io/badge/github-gustavoeraldo-7159C1?logo=GitHub"/>
+  </a>
+  <a href="https://www.linkedin.com/in/marismarcosta/">
+    <img src="https://img.shields.io/badge/linkedin-marismarcosta-blue?logo=linkedin"/>
+  </a>
+  <a href="https://www.linkedin.com/in/gustavoeraldo/">
+    <img src="https://img.shields.io/badge/linkedin-gustavoeraldo-blue?logo=linkedin"/>
+  </a>
 </p>
 
 <p align="center">
