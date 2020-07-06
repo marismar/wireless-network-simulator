@@ -62,18 +62,6 @@ Go into the file project then open the terminal and write the command bellow :
 python main.py
 ```
 
-## Authors
-
-👤 **Marismar da Costa Silva**
-
-* Github: [@marismarcosta](https://github.com/marismarcosta)
-* LinkedIn: [@marismarcosta](https://linkedin.com/in/marismarcosta)
-
-👤 **Gustavo Eraldo da Silva**
-
-* Github: [@EraldoCi](https://github.com/EraldoCi)
-* LinkedIn: [@gustavoeraldo](https://linkedin.com/in/gustavoeraldo)
-
 ## Show your support
 
 Give a ⭐️ if this project helped you!
