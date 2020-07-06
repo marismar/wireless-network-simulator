@@ -14,7 +14,7 @@
   </a>
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/top/marismarcosta/wireless-network?color=cd7f32" />
   <img alt="GitHub language count" src="https://img.shields.io/github/last-commit/marismarcosta/wireless-network?color=78866b" />
-  <img alt="GitHub language count" src="https://img.shields.io/github/repo-size/marismarcosta/wireless-network?color=7159C1" />
+  <img alt="GitHub language count" src="https://img.shields.io/github/repo-size/marismarcosta/wireless-network?color=ffa07a" />
   <a href="https://github.com/marismarcosta">
         <img src="https://img.shields.io/badge/github-marismarcosta-7159C1?logo=GitHub"/>
     </a>
