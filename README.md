@@ -1,5 +1,10 @@
 <h1 align="center">Wireless Network Simulator</h1>
 
+
+<h4 align="center">
+  A wireless network simulator developed in python, as a final project of the wireless networks course at UFPB 📡
+</h4>
+
 <p align="center">
   <a href="https://www.overleaf.com/project/5e87ee38b01f50000176e3e6" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
@@ -8,10 +13,6 @@
     <img alt="license: MIT" src="https://img.shields.io/badge/license-MIT-brightgreen.svg" />
   </a>
 </p>
-
-<h4 align="center">
-  A wireless network simulator developed in python, as a final project of the wireless networks course at UFPB 📡
-</h4>
 
 <p align="center">
   <a href="#workflow">Workflow</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
