@@ -38,6 +38,8 @@
 
 ## Workflow
 
+<img src="network-layers.png" />
+
 ## Layers
 
 Write some description
