@@ -10,8 +10,16 @@
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="https://github.com/marismarcosta/wireless-network/blob/master/LICENSE" target="_blank">
-    <img alt="license: MIT" src="https://img.shields.io/badge/license-MIT-brightgreen.svg" />
+    <img alt="license: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg" />
   </a>
+  <a href="https://linkedin/com/in/marismarcosta" target="_blank">
+    <img alt="linkedin: marismarcosta" src="https://img.shields.io/badge/linkedin-marismarcosta-blue.svg" />
+  </a>
+  
+  <a href="hhttps://www.linkedin.com/in/gustavoeraldo/" target="_blank">
+    <img alt="linkedin: gustavoeraldo" src="https://img.shields.io/badge/linkedin-gustavoeraldo-blue.svg" />
+  </a>
+  
 </p>
 
 <p align="center">
