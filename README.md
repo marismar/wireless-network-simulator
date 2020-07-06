@@ -38,7 +38,10 @@
 
 ## Workflow
 
-<img src="network-layers.png" />
+<p align="center">
+  <img src="network-layers.png" weight=350 />
+</p>
+
 
 ## Layers
 
