@@ -22,19 +22,6 @@
   <a href="#license">License</a>
 </p>
 
-## Table of Contents
-
-* [Layers Description](#layers-description)
-
-* [Input setup](#input-setup)
-  * [Creating a host](#creating-a-host)
-  * [Creating a data package](#creating-a-data-package)
-
-* [Run tests](#run-tests)
-
-* [Authors](#authors)
-
-
 ## Workflow
 
 ## Layers
