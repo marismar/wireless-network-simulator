@@ -47,7 +47,7 @@
 
 Write some description
 
-### Phisical
+### Physical
 
 ### Link
 
