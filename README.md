@@ -38,7 +38,9 @@
 
 ## Workflow
 
+<p align="justify">
 The project aims to implement a wireless network simulator, with definition of layers: physical, link and network. Using concepts such as hosts, communication protocols, position of devices in an environment, in order to evaluate the performance of the system.
+</p>
 
 <p align="center">
   <img src="network-layers.png" weight=350 />
@@ -47,18 +49,56 @@ The project aims to implement a wireless network simulator, with definition of l
 
 ## Layers
 
+
 Write some description
 
 ### Physical
 
+
+<p align="justify">
+The physical layer is responsible for sending packets from one physical interface to others, through the propagation of a signal.
+
+</p>
+
+
 ### Link
+
+
+#### MAC Protocol
+
+<p align="justify>
+The master coordinator is responsible for keeping a list of the packages to be sent, allowing the forwarding of only 1 at a time, respecting the order of arrival, to avoid signal collisions.      
+</p>
+
+
 
 ### Network
 
 
+
+
+#### DSR Protocol
+
+<p align="justify">
+The Dynamic Source Routing Protocol (DSR) is a routing technique, which the sender determines the complete sequence of host responsible for forwarding the packets to the receiver. Then, each node stores a __routing table__, which contains the routes known to each.
+</p>
+
+<p align="justify">
+The protocol is divided into two parts, route discovery and route maintenance. On the one hand, the overhead in the discovery process is reduced, however if the network is highly mobile on the connected devices, there is a need for greater concern with the maintenance of routes. Packages that travel over the network can be classified into three categories:
+</p>
+
+<ul>
+  <li>RREQ: </li>
+  <li>RREP: </li>
+  <li>DATA: </li>
+</ul>
+
+
 ## Setup
- 
+
+
 ### Creating a host
+
 
 Create a host by wirting ` new_host = host(host_id, x_position, y_position, master, range_ratio) ` into the main.js. The **master** <br> is the entity that decides which host will send data, so you must create only one master. 
 
