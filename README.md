@@ -36,7 +36,7 @@
   <a href="#license">License</a>
 </p>
 
-## Workflow
+<h2> Workflow </h2>
 
 <p align="justify">
 The project aims to implement a wireless network simulator, with definition of layers: physical, link and network. Using concepts such as hosts, communication protocols, position of devices in an environment, in order to evaluate the performance of the system.
@@ -46,13 +46,12 @@ The project aims to implement a wireless network simulator, with definition of l
   <img src="network-layers.png" weight=350 />
 </p>
 
-
-## Layers
+<h2> Layers </h2>
 
 
 Write some description
 
-### Physical
+<h3> Physical </h3>
 
 
 <p align="justify">
@@ -61,26 +60,21 @@ The physical layer is responsible for sending packets from one physical interfac
 </p>
 
 
-### Link
+<h3> Link </h3>
 
 
-#### MAC Protocol
+<h4> MAC Protocol </h4>
 
 <p align="justify>
 The master coordinator is responsible for keeping a list of the packages to be sent, allowing the forwarding of only 1 at a time, respecting the order of arrival, to avoid signal collisions.      
 </p>
 
+<h3> Network </h3>
 
-
-### Network
-
-
-
-
-#### DSR Protocol
+<h4> DSR Protocol </h4>
 
 <p align="justify">
-The Dynamic Source Routing Protocol (DSR) is a routing technique, which the sender determines the complete sequence of host responsible for forwarding the packets to the receiver. Then, each node stores a __routing table__, which contains the routes known to each.
+The Dynamic Source Routing Protocol (DSR) is a routing technique, which the sender determines the complete sequence of host responsible for forwarding the packets to the receiver. Then, each node stores a routing table, which contains the routes known to each.
 </p>
 
 <p align="justify">
@@ -94,20 +88,20 @@ The protocol is divided into two parts, route discovery and route maintenance. O
 </ul>
 
 
-## Setup
+<h2> Setup </h2>
 
 
-### Creating a host
+<h3> Creating a host </h3>
 
 
 Create a host by wirting ` new_host = host(host_id, x_position, y_position, master, range_ratio) ` into the main.js. The **master** <br> is the entity that decides which host will send data, so you must create only one master. 
 
-### Creating a data package
+<h3> Creating a data package </h3>
 
 Create a data package for any host by : `host_name.send_message("message content", receiver_host_id)`
 
 
-## Run
+<h2> Run </h2>
 
 Go into the file project then open the terminal and write the command bellow :
 
@@ -115,11 +109,11 @@ Go into the file project then open the terminal and write the command bellow :
 python main.py
 ```
 
-## Show your support
+<h2> Show your support </h2>
 
 Give a ⭐️ if this project helped you!
 
-## License
+<h2> License </h2>
 
 Copyright © 2020 [Marismar da Costa Silva](https://github.com/marismarcosta), [Gustavo Eraldo da Silva](https://github.com/EraldoCi).<br />
 This project is [MIT](https://github.com/marismarcosta/wireless-network/blob/master/LICENSE) licensed.
