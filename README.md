@@ -63,9 +63,9 @@ The master coordinator is responsible for keeping a list of the packages to be s
 
 #### DSR Protocol
 
-The Dynamic Source Routing Protocol (DSR) is a routing technique, which the sender determines the complete sequence of host responsible for forwarding the packets to the receiver. Then, each node stores a routing table, which contains the routes known to each.
+The Dynamic Source Routing Protocol (DSR) is a routing technique, which the sender determines the complete sequence of host responsible for forwarding the packets to the receiver. Then, each node stores a __routing table__, which contains the routes known to each.
 
-The protocol is divided into two parts, route discovery and route maintenance. On the one hand, the overhead in the discovery process is reduced, however if the network is highly mobile on the connected devices, there is a need for greater concern with the maintenance of routes. Packages that travel over the network can be classified into three categories:
+Packages that travel over the network can be classified into three categories:
 
   - RREQ: 
   - RREP:
