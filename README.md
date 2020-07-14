@@ -41,7 +41,7 @@
 The project aims to implement a wireless network simulator, with definition of layers: physical, link and network. Using concepts such as hosts, communication protocols, position of devices in an environment, in order to evaluate the performance of the system.
 
 <p align="center">
-  <img src="network-layers.png" weight=350 />
+  <img src=".github/network-layers.png" weight=350 />
 </p>
 
 ## Layers 
