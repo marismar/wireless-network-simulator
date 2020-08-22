@@ -8,12 +8,12 @@
   <a href="https://www.overleaf.com/project/5e87ee38b01f50000176e3e6" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
-  <a href="https://github.com/marismarcosta/wireless-network/blob/master/LICENSE" target="_blank">
+  <a href="https://github.com/marismarcosta/wireless-network-simulator/blob/master/LICENSE" target="_blank">
     <img alt="license: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg" />
   </a>
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/top/marismarcosta/wireless-network?color=cd7f32" />
-  <img alt="GitHub language count" src="https://img.shields.io/github/last-commit/marismarcosta/wireless-network?color=78866b" />
-  <img alt="GitHub language count" src="https://img.shields.io/github/repo-size/marismarcosta/wireless-network?color=ffa07a" />
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/top/marismarcosta/wireless-network-simulator?color=cd7f32" />
+  <img alt="GitHub language count" src="https://img.shields.io/github/last-commit/marismarcosta/wireless-network-simulator?color=78866b" />
+  <img alt="GitHub language count" src="https://img.shields.io/github/repo-size/marismarcosta/wireless-network-simulator?color=ffa07a" />
   <a href="https://github.com/marismarcosta">
     <img src="https://img.shields.io/badge/github-marismarcosta-7159C1?logo=GitHub"/>
   </a>
